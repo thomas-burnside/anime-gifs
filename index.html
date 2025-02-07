@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Pics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e2e2e2;
+        }
+
+        .anime {
+            background-color: white;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid #ffbd59;
+            margin-top: 30px;
+        }
+
+        .anime h1 {
+            text-align: center;
+            font-family: "Libre Baskerville", serif;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        #anime-pic {
+            width: 90%;
+            align-items: center;
+            display: none;
+            margin: auto;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            height: 300px;
+            width: 90%;
+            object-fit: cover;
+        }
+
+        #get-img{
+            color: white;
+            background-color: #0097b2;
+            border: 2px solid #ffbd59;
+            font-size: 21px;
+            display: block;
+            margin: auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 10px 20px;
+            font-family: "Montserrat", sans-serif !important;
+            cursor: pointer;
+        }
+        @media screen and (max-width: 375px){
+            #anime-pic{width: 90%;}
+        }
+    </style>
+</head>
+
+<body>
+    <div class="anime">
+        <h1>Anime GIFS</h1>
+        <img src="https://i.waifu.pics/KZAo-Va.gif" alt="Picture" id="anime-pic">
+        <button id="get-img">Get an anime GIF!</button>
+    </div>
+    <script>
+        const buttonEl = document.getElementById("get-img");
+        const imageEl = document.getElementById("anime-pic")
+
+        async function fetchImage(){
+            try{
+            const response = await fetch (`https://api.waifu.pics/sfw/smile`);
+            const data = await response.json();
+            imageEl.src = data.url;
+            imageEl.style.display = "block";
+            }catch{
+                console.error("Error fetching image:", error);
+            }
+        }
+
+        buttonEl.addEventListener("click", fetchImage);
+    </script>
+</body>
+</html>
